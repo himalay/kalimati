@@ -88,7 +88,7 @@ class App extends Component {
           <AppBar
           className="appbar-bg"
           title={ <div className="appbar-title">
-            <span>कालीमाटी</span>
+            <span>तरकारी</span>
             <span className="date-np">मिति: {this.state.dateNp}</span>
             </div> }
           showMenuIconButton={false}
