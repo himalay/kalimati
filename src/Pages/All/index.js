@@ -6,10 +6,6 @@ import IconButton from 'material-ui/IconButton'
 import { red400 } from 'material-ui/styles/colors'
 
 class AllPage extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   handleFavoriteToggle = (itemName) => {
     let list = this.props.Parent.state.favoriteList
     if (list[itemName]) {

@@ -58,45 +58,21 @@ class App extends Component {
   }
 
   componentWillMount () {
-    if (this.state.dateEn && Math.abs((new Date() - new Date(this.state.dateEn))) / 36e5 < 2) return
-
-    let data = []
-    fetch('https://cors-anywhere.herokuapp.com/kalimatimarket.com.np/priceinfo/dlypricebulletin', {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
-          'X-Requested-With': 'XMLHttpRequest',
-          'Origin': 'http://kalimatimarket.gov.np'
-        },
-        body: `cdate=${getFormattedDate(new Date())}&pricetype=R`
-      })
-      .then(res => res.text())
-      .then(html => {
-        let tableRows = [...Object.assign(document.createElement('div'), {
-          innerHTML: html
-        }).querySelectorAll('table')[1].rows]
-
-        let dateNp = tableRows[1].cells[0].innerText.trim()
-        let headers = [...tableRows[2].cells].map(td => td.innerText.trim())
-
-        data = tableRows.map((row, i) => {
-          let obj = {}
-          if(i > 2) {
-            [...row.cells].map((td, j) => {
-              obj[headers[j]] = td.innerText.trim()
-            })
-            return obj
-          }
-        }).splice(3)
-
-        if (data.length) {
+    getData(this.state.dateEn).then(({data, date, dateNp}) => {
+      if (data && data.length) {
+        this.updateData(data)
+        this.updateDateNp(dateNp)
+        this.updateDateEn(date)
+      } else {
+        const yesterday = new Date()
+        yesterday.setDate(yesterday.getDate() - 1)
+        getData(this.state.dateEn, yesterday).then(({data, date, dateNp}) => {
           this.updateData(data)
           this.updateDateNp(dateNp)
-          this.updateDateEn(new Date())
-          data = []
-        }
-      })
-      .catch(console.error)
+          this.updateDateEn(date)
+        })
+      }
+    })
   }
 
   handleChange = (value) => {
@@ -139,14 +115,44 @@ class App extends Component {
   }
 }
 
-function getFormattedDate (date) {
-  let month = (1 + date.getMonth()).toString()
-  month = month.length > 1 ? month : '0' + month
+function getData (dateEn, date = new Date()) {
+  return new Promise((resolve) => {
+    if (dateEn && Math.abs((date - new Date(dateEn))) / 36e5 < 2) return resolve()
 
-  let day = date.getDate().toString()
-  day = day.length > 1 ? day : '0' + day
+    let data = []
+    const get2d = num => num.toString().length < 2 ? '0' + num : num
+    fetch('https://cors-anywhere.herokuapp.com/kalimatimarket.gov.np/priceinfo/dlypricebulletin', {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+          'X-Requested-With': 'XMLHttpRequest',
+          'Origin': 'http://kalimatimarket.gov.np'
+        },
+        body: `cdate=${get2d(date.getMonth() + 1) + '/' + get2d(date.getDate()) + '/' + date.getFullYear()}&pricetype=R`
+      })
+      .then(res => res.text())
+      .then(html => {
+        let tableRows = [...Object.assign(document.createElement('div'), {
+          innerHTML: html
+        }).querySelectorAll('table')[1].rows]
 
-  return month + '/' + day + '/' + date.getFullYear()
+        let dateNp = tableRows[1].cells[0].innerText.trim()
+        let headers = [...tableRows[2].cells].map(td => td.innerText.trim())
+
+        data = tableRows.map((row, i) => {
+          let obj = {}
+          if(i > 2) {
+            [...row.cells].forEach((td, j) => {
+              obj[headers[j]] = td.innerText.trim()
+            })
+          }
+          return obj
+        }).splice(3)
+
+        resolve({ date, dateNp, data})
+      })
+      .catch(console.error)
+  })
 }
 
 export default App

@@ -2,10 +2,6 @@ import React, { Component } from 'react'
 import { List, ListItem } from 'material-ui/List'
 
 class FavoritePage extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
     return (
       <div className="page page-bg-gradient">
