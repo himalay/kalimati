@@ -128,7 +128,7 @@ function getData (dateEn, date = new Date()) {
           'X-Requested-With': 'XMLHttpRequest',
           'Origin': 'http://kalimatimarket.gov.np'
         },
-        body: `cdate=${get2d(date.getMonth() + 1) + '/' + get2d(date.getDate()) + '/' + date.getFullYear()}&pricetype=R`
+        body: `cdate=${get2d(date.getMonth() + 1) + '/' + get2d(date.getDate()) + '/' + date.getFullYear()}&pricetype=W`
       })
       .then(res => res.text())
       .then(html => {

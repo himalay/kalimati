@@ -19,7 +19,7 @@ class AllPage extends Component {
   render() {
     return (
       <div className="page page-bg-gradient">
-        <h3>दैनिक खुद्रा औसत मूल्य विवरण</h3>
+        <h3>दैनिक थोक औसत मूल्य विवरण</h3>
         <List>
           { this.props.Parent.state.data.map((item, i) => <ListItem
           key={`key${ i }`}
