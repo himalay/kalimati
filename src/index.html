@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Kalimati Fruits & Vegetables</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <link rel="icon" type="image/png" sizes="24x24" href="/icons/icon-72x72.png" />
+    <style>
+      body {
+        margin: 0;
+      }
+      @media (min-width: 1280px) {
+        .skeleton {
+          max-width: 1280px;
+        }
+      }
+      @media (min-width: 600px) {
+        .skeleton {
+          padding-left: 24px;
+          padding-right: 24px;
+        }
+      }
+      .skeleton {
+        width: 100%;
+        display: block;
+        box-sizing: border-box;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="App">
+      <svg role="img" width="100%" aria-labelledby="loading-aria" viewBox="0 0 400 15" preserveAspectRatio="none">
+        <title id="loading-aria">Loading...</title>
+        <rect x="0" y="0" width="100%" height="15px" clip-path="url(#clip-pathh)" style="fill: url('#fill')"></rect>
+        <defs>
+          <clipPath id="clip-pathh">
+            <rect x="0" y="0" rx="0" ry="0" width="418" height="15" />
+          </clipPath>
+          <linearGradient id="fill">
+            <stop offset="0.599964" stop-color="#f3f3f3" stop-opacity="1">
+              <animate
+                attributeName="offset"
+                values="-2; -2; 1"
+                keyTimes="0; 0.25; 1"
+                dur="2s"
+                repeatCount="indefinite"
+              ></animate>
+            </stop>
+            <stop offset="1.59996" stop-color="#ecebeb" stop-opacity="1">
+              <animate
+                attributeName="offset"
+                values="-1; -1; 2"
+                keyTimes="0; 0.25; 1"
+                dur="2s"
+                repeatCount="indefinite"
+              ></animate>
+            </stop>
+            <stop offset="2.59996" stop-color="#f3f3f3" stop-opacity="1">
+              <animate
+                attributeName="offset"
+                values="0; 0; 3"
+                keyTimes="0; 0.25; 1"
+                dur="2s"
+                repeatCount="indefinite"
+              ></animate>
+            </stop>
+          </linearGradient>
+        </defs>
+      </svg>
+
+      <svg role="img" class="skeleton" aria-labelledby="loading-aria" viewBox="0 0 400 400" preserveAspectRatio="none">
+        <title id="loading-aria">Loading...</title>
+        <rect x="0" y="0" width="100%" height="100%" clip-path="url(#clip-path)" style="fill: url('#fill')"></rect>
+        <defs>
+          <clipPath id="clip-path">
+            <rect x="0" y="5" rx="0" ry="0" width="162" height="18" />
+            <rect x="0" y="41" rx="0" ry="0" width="494" height="10" />
+            <rect x="0" y="62" rx="0" ry="0" width="732" height="160" />
+            <rect x="0" y="230" rx="0" ry="0" width="418" height="160" />
+          </clipPath>
+          <linearGradient id="fill">
+            <stop offset="0.599964" stop-color="#f3f3f3" stop-opacity="1">
+              <animate
+                attributeName="offset"
+                values="-2; -2; 1"
+                keyTimes="0; 0.25; 1"
+                dur="2s"
+                repeatCount="indefinite"
+              ></animate>
+            </stop>
+            <stop offset="1.59996" stop-color="#ecebeb" stop-opacity="1">
+              <animate
+                attributeName="offset"
+                values="-1; -1; 2"
+                keyTimes="0; 0.25; 1"
+                dur="2s"
+                repeatCount="indefinite"
+              ></animate>
+            </stop>
+            <stop offset="2.59996" stop-color="#f3f3f3" stop-opacity="1">
+              <animate
+                attributeName="offset"
+                values="0; 0; 3"
+                keyTimes="0; 0.25; 1"
+                dur="2s"
+                repeatCount="indefinite"
+              ></animate>
+            </stop>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+  </body>
+</html>
