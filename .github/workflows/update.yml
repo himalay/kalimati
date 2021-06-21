@@ -2,8 +2,8 @@ name: Update Data Daily
 
 on:
   schedule:
-    - cron: '25,30 12 * * *'
-    # At NPT 07:55, 08:05, 08:15
+    # * is a special character in YAML so you have to quote this string
+    - cron: '0/5 * * * *'
 
 jobs:
   update:
