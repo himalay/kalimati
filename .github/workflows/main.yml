@@ -1,12 +1,15 @@
-name: Publish
+name: Update Data and Publish
 
 on:
-  push:
-    branches:
-      - development
+  schedule:
+    # NPT 7:50, 8:10
+    - cron: 5,25 2 * * *
+  create:
+    tags:
+      - v*
 
 jobs:
-  publish:
+  update:
     runs-on: ubuntu-latest
 
     steps:
@@ -14,6 +17,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14.x'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
@@ -28,6 +32,28 @@ jobs:
 
       - run: yarn install --pure-lockfile
         name: Install dependencies
+      - run: yarn run update:daily:data
+        name: Fetch and update today's price data
+
+      - name: git check in
+        env:
+          GIT_OWNER_EMAIL: ${{ secrets.GIT_OWNER_EMAIL }}
+          GH_PERSONAL_TOKEN: ${{ secrets.GH_PERSONAL_TOKEN }}
+        run: |
+          git config user.email "$GIT_OWNER_EMAIL"
+          git config user.name "himalay"
+
+          if [[ `git status --porcelain` ]]; then
+            git add .
+            git commit -a -m "Update daily price"
+            git remote rm origin
+            git remote add origin https://himalay:$GH_PERSONAL_TOKEN@github.com/himalay/kalimati
+            npm version patch
+            git push origin HEAD:development --tags
+          else
+            echo 'Nothing to check in'
+          fi
+
       - run: yarn build
         name: Build 🔨
         env:
