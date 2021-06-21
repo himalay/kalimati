@@ -7,7 +7,7 @@ export default function ComboBox({ label, options, value, onChange }) {
   return (
     <Autocomplete
       options={options}
-      style={{ width: 500 }}
+      style={{ maxWidth: 500 }}
       value={value}
       renderInput={(params) => <TextField {...params} variant="outlined" label={label} />}
       onChange={onChange}

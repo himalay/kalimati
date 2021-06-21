@@ -1,5 +1,6 @@
 import React, { useContext, lazy, Suspense } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles, useTheme } from '@material-ui/core/styles'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
@@ -31,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
       height: 40,
     },
   },
-  title: { flex: 1 },
+  space: { flex: 1 },
   comboBoxWrapper: {
     marginTop: '2em',
   },
@@ -42,6 +43,8 @@ export default function Routes() {
   const history = useHistory()
   const location = useLocation()
   const { commodities, commodity, setCommodity, setCommodityData } = useContext(GlobalContext)
+  const theme = useTheme()
+  const matches = useMediaQuery(theme.breakpoints.down('sm'))
 
   const commodityChangeHandler = (_, value) => {
     setCommodity(value)
@@ -61,9 +64,10 @@ export default function Routes() {
           <IconButton edge="start" className={classes.menuButton} onClick={() => history.replace('/')} color="inherit">
             <img src="/icons/icon-72x72.png" />
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
+          <Typography variant="h6" style={matches ? {  display: 'none'  } : {}}>
             Kalimati Fruits & Vegetables
           </Typography>
+          <div className={classes.space}></div>
           <Tabs value={location.pathname} onChange={tabChangeHandler}>
             <Tab label="Dataset" icon={<ShowChartIcon />} value="/dataset" />
             <Tab label="Predictions" icon={<TimelineIcon />} value="/predictions" />
@@ -107,7 +111,7 @@ export default function Routes() {
             exact
             path="/about"
             component={() => (
-              <Suspense fallback={<Skeleton />}>
+              <Suspense fallback={<div />}>
                 <About />
               </Suspense>
             )}
