@@ -1,15 +1,16 @@
 {
   "name": "kalimati",
   "version": "0.0.1",
-  "description": "Kalimati Price Forecasting",
+  "description": "Kalimati Fruits & Vegetables Price Forecasting",
   "main": "''",
   "engines": {
-    "node": "14.17.0"
+    "node": "14.x"
   },
+  "browserslist": "> 0.25%, not dead",
   "scripts": {
     "clean": "shx rm -rf build",
     "webpack": "webpack --config config/webpack.config.production.js",
-    "build": "npm run clean && npm run webpack",
+    "build": "npm run clean && npm run webpack --stats-children",
     "lint": "eslint src config",
     "start": "webpack-cli serve --mode development --config config/webpack.config.dev.js",
     "start:prod": "serve -s build",
