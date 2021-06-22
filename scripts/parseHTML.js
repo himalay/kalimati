@@ -27,7 +27,10 @@ const commoditySet = new Set()
       const index = headers.indexOf(commodity)
       row[index] = avgPrices[i]
     }
-    fs.appendFileSync(CSV_FILE_PATH, row.join(',') + '\n')
+    const csvRow = row.join(',')
+    if (/(,[\d.]+){1,}/.test(csvRow)) {
+      fs.appendFileSync(CSV_FILE_PATH, csvRow + '\n')
+    }
   }
 })()
 

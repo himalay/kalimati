@@ -18,7 +18,7 @@ const months = [
 
 const DATA_FOLDER = path.resolve(__dirname, '../src/assets/data')
 
-module.exports = () => {
+const parseCSV = () => {
   const csv = fs.readFileSync(path.resolve(__dirname, './data.csv'), 'utf-8')
   // first row should be headers
   // first column should be date
@@ -104,3 +104,9 @@ function getYearMonth(dateString) {
 
   return [year, month]
 }
+
+if (require.main === module) {
+  parseCSV()
+}
+
+module.exports = parseCSV

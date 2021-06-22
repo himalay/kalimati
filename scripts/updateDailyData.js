@@ -14,13 +14,17 @@ const today = new Date()
 const dd = String(today.getDate()).padStart(2, '0')
 const mm = String(today.getMonth() + 1).padStart(2, '0')
 const yyyy = today.getFullYear()
+const hours = today.getHours()
 const date = `${yyyy}-${mm}-${dd}`
 const dataExists = date === lastDate
 
-if (!dataExists && today.getHours() > 7) {
+// GMT hours
+if (!dataExists && hours > 1 && hours < 5) {
   axios.get('https://kalimatimarket.gov.np/price').then(({ data: html }) => {
     const row = parseHTML(date, headers, html)
-    fs.appendFileSync(DATA_CSV_PATH, row + '\n')
-    parseCSV()
+    if (/(,[\d.]+){1,}/.test(row)) {
+      fs.appendFileSync(DATA_CSV_PATH, row + '\n')
+      parseCSV()
+    }
   })
 }
