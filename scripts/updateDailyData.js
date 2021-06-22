@@ -14,12 +14,10 @@ const today = new Date()
 const dd = String(today.getDate()).padStart(2, '0')
 const mm = String(today.getMonth() + 1).padStart(2, '0')
 const yyyy = today.getFullYear()
-const hours = today.getHours()
 const date = `${yyyy}-${mm}-${dd}`
 const dataExists = date === lastDate
 
-// GMT hours
-if (!dataExists && hours > 1 && hours < 5) {
+if (!dataExists) {
   axios.get('https://kalimatimarket.gov.np/price').then(({ data: html }) => {
     const row = parseHTML(date, headers, html)
     if (/(,[\d.]+){1,}/.test(row)) {
