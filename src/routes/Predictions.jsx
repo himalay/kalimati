@@ -42,11 +42,11 @@ function formatDate(date) {
 }
 
 const DEFAULT_DATA_SIZE = 98
-const DEFAULT_EPOCHS = 4
+const DEFAULT_EPOCHS = 20
 const DEFAULT_LEARNING_RATE = 0.02
 const DEFAULT_LSTM_LAYERS = 1
 const DEFAULT_SMA_WINDOW_SIZE = 1
-const DEFAULT_BATCH_SIZE = 64
+const DEFAULT_BATCH_SIZE = 32
 const DEFAULT_PREDICTION_DAYS = 7
 
 export default function Predictions() {
@@ -199,7 +199,7 @@ export default function Predictions() {
       } else if (type === 'MAKE_PREDICTIONS_SUCCESS') {
         const { predictions } = event.data
         const dataCount = commodityData.data.y.length
-        const nDaysOfLatestTrend = 7
+        const nDaysOfLatestTrend = predictionDays < 7 ? 7 : predictionDays
         const latestTrend = commodityData.data.y.slice(dataCount - nDaysOfLatestTrend, dataCount)
         const dates = commodityData.data.x.slice(dataCount - nDaysOfLatestTrend, dataCount)
 
@@ -237,6 +237,7 @@ export default function Predictions() {
     validateModel,
     commodityData.data,
     makePredictions,
+    predictionDays,
   ])
 
   useEffect(() => {
@@ -272,9 +273,9 @@ export default function Predictions() {
                 <Slider
                   defaultValue={DEFAULT_DATA_SIZE}
                   valueLabelDisplay="on"
-                  step={1}
+                  step={0.5}
                   marks
-                  min={90}
+                  min={80}
                   max={100}
                   disabled={training}
                   onChangeCommitted={(_, value) => setDatasetSize(value)}
@@ -288,7 +289,7 @@ export default function Predictions() {
                   step={1}
                   marks
                   min={2}
-                  max={100}
+                  max={500}
                   disabled={training}
                   onChangeCommitted={(_, value) => setEpochs(value)}
                 />
@@ -325,9 +326,9 @@ export default function Predictions() {
                   defaultValue={DEFAULT_BATCH_SIZE}
                   valueLabelDisplay="on"
                   step={null}
-                  marks={[16, 32, 64, 128, 256].map((value) => ({ value }))}
+                  marks={[16, 32, 64, 128, 256, 512].map((value) => ({ value }))}
                   min={16}
-                  max={256}
+                  max={512}
                   disabled={training}
                   onChangeCommitted={(_, value) => setBatchSize(value)}
                 />
