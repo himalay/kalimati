@@ -18,7 +18,6 @@
     "url": "https://github.com/himalay/kalimati/issues"
   },
   "license": "MIT",
-  "type": "module",
   "scripts": {
     "start": "vite",
     "build": "tsc && vite build",
