@@ -1,0 +1,80 @@
+{
+  "name": "kalimati",
+  "version": "1.0.0",
+  "homepage": "https://kalimati.dev.page/",
+  "description": "Daily commodity price information published by Kalimati Fruits and Vegetable Market.",
+  "keywords": [
+    "kalimati",
+    "react",
+    "mui",
+    "pwa",
+    "vite"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/himalay/kalimati.git"
+  },
+  "bugs": {
+    "url": "https://github.com/himalay/kalimati/issues"
+  },
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "lint": "prettier ./src --write --loglevel warn; eslint ./src --cache --fix",
+    "prepare": "husky install",
+    "update-data": "node scripts/updateData.js"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write"
+    ],
+    "src/**/*.{js,jsx,ts,tsx,json}": [
+      "eslint --fix"
+    ]
+  },
+  "dependencies": {
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
+    "@mui/icons-material": "^5.8.0",
+    "@mui/material": "^5.8.1",
+    "axios": "^0.27.2",
+    "axios-cache-adapter": "^2.7.3",
+    "localforage": "^1.10.0",
+    "notistack": "^2.0.5",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "react-error-boundary": "^3.1.4",
+    "recoil": "^0.7.2",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^3.2.0",
+    "@types/node": "^17.0.35",
+    "@types/react": "^18.0.9",
+    "@types/react-dom": "^18.0.5",
+    "@types/react-swipeable-views": "^0.13.1",
+    "@types/uuid": "^8.3.4",
+    "@typescript-eslint/eslint-plugin": "^5.26.0",
+    "@typescript-eslint/parser": "^5.26.0",
+    "@vitejs/plugin-react": "^1.3.2",
+    "axios-cookiejar-support": "^4.0.2",
+    "eslint": "^8.16.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.30.0",
+    "eslint-plugin-react-hooks": "^4.5.0",
+    "https-localhost": "^4.7.1",
+    "husky": "^8.0.1",
+    "lint-staged": "^12.4.2",
+    "node-html-parser": "^5.3.3",
+    "prettier": "^2.6.2",
+    "tough-cookie": "^4.0.0",
+    "typescript": "^4.6.4",
+    "vite": "^2.9.9",
+    "vite-plugin-pwa": "^0.12.0"
+  }
+}

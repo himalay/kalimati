@@ -1,0 +1,25 @@
+{
+  "name": "Kalimati",
+  "short_name": "Kalimati",
+  "description": "Daily commodity price information published by Kalimati Fruits and Vegetable Market.",
+  "background_color": "#232323",
+  "theme_color": "#649c36",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
