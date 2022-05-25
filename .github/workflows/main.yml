@@ -14,7 +14,7 @@ jobs:
           node-version: 16
           cache: 'npm'
       - name: Install dependencies
-        run: npm i axios@0.27.2 node-html-parser@5.3.3 axios-cookiejar-support@4.0.1 tough-cookie@4.0.0
+        run: npm i axios@0.27.2 node-html-parser@5.3.3 axios-cookiejar-support@4.0.2 tough-cookie@4.0.0
       - name: Update data
         run: npm run update-data
       - name: Git check in
