@@ -1,4 +1,4 @@
-name: Fetch and save data
+name: Update data
 
 on:
   schedule:
