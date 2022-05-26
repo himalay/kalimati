@@ -1,0 +1,37 @@
+name: Update Data
+
+on:
+  schedule:
+    - cron: '15,45 1,2,3,4 * * *'
+
+jobs:
+  update:
+    name: Update Data
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm i axios@0.27.2 node-html-parser@5.3.3 axios-cookiejar-support@4.0.2 tough-cookie@4.0.0
+
+      - name: Execute update-data script
+        run: npm run update-data
+
+      - name: Git check in
+        run: |
+          if [[ `git status --porcelain` ]]; then
+            git config user.name github-actions
+            git config user.email github-actions@github.com
+            git add .
+            git commit -m "Update data for $(date +%Y-%m-%d)"
+            git push
+          else
+            echo 'Nothing to check in'
+          fi
