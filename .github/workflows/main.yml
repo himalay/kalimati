@@ -1,8 +1,7 @@
 name: Update data
-
 on:
   schedule:
-    - cron: 15,45 1,2,3 * * *
+    - cron:  '15,45 1,2,3 * * *'
 
 jobs:
   build:
@@ -15,7 +14,7 @@ jobs:
           cache: 'npm'
       - name: Install dependencies
         run: npm i axios@0.27.2 node-html-parser@5.3.3 axios-cookiejar-support@4.0.2 tough-cookie@4.0.0
-      - name: Update data
+      - name: Execute update-data script
         run: npm run update-data
       - name: Git check in
         run: |
