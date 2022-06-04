@@ -9,13 +9,19 @@ const axiosWithCookie = wrapper(axios)
 
 const cookieJar = new CookieJar()
 
+const httpHeaders = {
+  'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:100.0) Gecko/20100101 Firefox/100.0'
+}
+
 axiosWithCookie
   .get('https://kalimatimarket.gov.np/lang/en', {
+    headers: httpHeaders,
     jar: cookieJar,
     withCredentials: true,
   })
   .then(({ data }) => {
     axiosWithCookie.get('https://kalimatimarket.gov.np', {
+      headers: httpHeaders,
       jar: cookieJar,
       withCredentials: true,
     })
@@ -36,3 +42,4 @@ axiosWithCookie
 
     writeFileSync('public/data.json', JSON.stringify({ date, headers, rows }))
   })
+  .catch(console.error)
