@@ -20,12 +20,6 @@ axiosWithCookie
     withCredentials: true,
   })
   .then(({ data }) => {
-    axiosWithCookie.get('https://kalimatimarket.gov.np', {
-      headers: httpHeaders,
-      jar: cookieJar,
-      withCredentials: true,
-    })
-
     const parsePrice = (price) => parseInt(price.replace('Rs.', '').trim())
 
     const parseRow = (row) => {
