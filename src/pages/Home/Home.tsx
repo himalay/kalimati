@@ -4,6 +4,7 @@ import api from '@/api'
 import { title } from '@/config'
 import useNotifications from '@/store/notifications'
 import useTheme from '@/store/theme'
+import commodityMap from '@/utils/commodityMap'
 import CloseIcon from '@mui/icons-material/Close'
 import HeightIcon from '@mui/icons-material/Height'
 import ThemeIcon from '@mui/icons-material/InvertColors'
@@ -235,6 +236,8 @@ function Home() {
                   }}
                 >
                   {row.commodity}
+                  <br />
+                  {commodityMap[row.commodity]}
                 </TableCell>
                 <TableCell>
                   <Box
