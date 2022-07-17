@@ -23,8 +23,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "lint": "prettier ./src --write --loglevel warn; eslint ./src --cache --fix",
-    "prepare": "husky install",
-    "update-data": "node scripts/updateData.js"
+    "prepare": "husky install"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
@@ -63,7 +62,6 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.30.1",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "https-localhost": "^4.7.1",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
