@@ -99,12 +99,13 @@ const todayYear = today.getFullYear()
 const todayMonth = today.getMonth() + 1
 const todayDate = today.getDate()
 const initialData = tryParseJASON<Price[]>(localStorage.getItem(KALIMATI_DATA) || '')
+const initialDataDate = localStorage.getItem(KALIMATI_UPDATED_AT) || ''
 const initialSort = localStorage.getItem(KALIMATI_SORT) === SORT_DESC ? SORT_DESC : SORT_ASC
 
 function Home() {
   const [, notificationsActions] = useNotifications()
   const [loading, setLoading] = useState(false)
-  const [dataDate, setDataDate] = useState('')
+  const [dataDate, setDataDate] = useState(initialDataDate)
   const [rows, setRows] = useState<Price[]>(initialData)
   const [sort, setSort] = useState<typeof SORT_ASC | typeof SORT_DESC>(initialSort)
   const [, themeActions] = useTheme()
