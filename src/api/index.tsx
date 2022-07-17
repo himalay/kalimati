@@ -1,24 +1,12 @@
-import { GetOptions } from './types'
-import { AxiosPromise } from 'axios'
-import { setup } from 'axios-cache-adapter'
-import localforage from 'localforage'
+import axios from 'axios'
 
-const store = localforage.createInstance({
-  driver: [localforage.INDEXEDDB, localforage.LOCALSTORAGE],
-  name: 'kalimati-api-cache',
-})
-
-const session = setup({
-  timeout: 10000,
-  cache: {
-    store,
-    maxAge: 24 * 60 * 60 * 1000,
-    exclude: { query: false },
-  },
-})
+const PROXY_BASEURL = 'https://cors-anywhere.himalay.workers.dev/?'
 
 // eslint-disable-next-line comma-spacing
-const get = <T,>(url: string, options?: GetOptions): AxiosPromise<T> =>
-  session.get<T>(url, { params: options?.params, cache: options?.cache })
+const get = <T,>(url: string) => {
+  const requestUrl = url.startsWith('https') ? PROXY_BASEURL + url : url
+
+  return axios.get<T>(requestUrl)
+}
 
 export default { get }
