@@ -286,10 +286,10 @@ function Home() {
                       textTransform: 'uppercase',
                     }}
                   >
-                    <Typography sx={{ alignSelf: 'flex-end', fontSize: '0.8em', mr: -0.5 }}>{row.minprice}</Typography>
+                    <Typography sx={{ alignSelf: 'flex-end', fontSize: '0.8em', mr: -0.5 }}>{+row.minprice}</Typography>
                     <HeightIcon sx={{ color: (t) => alpha(t.palette.text.primary, 0.25) }} />
                     <Typography sx={{ alignSelf: 'flex-start', fontSize: '0.8em', ml: -0.5, mr: 1 }}>
-                      {row.maxprice}
+                      {+row.maxprice}
                     </Typography>{' '}
                     / {row.commodityunit}
                   </Box>
